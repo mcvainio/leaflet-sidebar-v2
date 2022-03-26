@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>ArcticNet Basemap & Stripmap Viewer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<script src="Leaflet-butbetter.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-sidebar-v2@3.1.1/css/leaflet-sidebar.min.css"><link rel="stylesheet" href="./style.css">
+</head>
+
+
+<style>
+body {
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body,
+#map {
+  height: 100%;
+  font-family: "Roboto", sans-serif;
+}
+
+/* Leaflet Layers Control */
+
+.leaflet-control-layers {
+  border-radius: none;
+  box-shadow: none;
+}
+
+.leaflet-control-layers-expanded {
+  width: 100% !important;
+  padding: 0px;
+  background-color: transparent;
+  border: none !important;
+}
+
+#layercontrol {
+  display: inline-block;
+  width: 100%;
+  padding: 10px;
+  background-color: transparent;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+#layercontrol .title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+  #pixelValue {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    background: white;
+    padding: 1em;
+  font-family: "Roboto", sans-serif;
+  font-size: 11px
+  }
+</style>
+
+
+
+<body>
+
+<div id="sidebar" class="leaflet-sidebar collapsed">
+  <!-- Nav tabs -->
+  <div class="leaflet-sidebar-tabs">
+    <!-- top aligned tabs -->
+    <ul role="tablist">
+      <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+      <li><a href="#autopan" role="tab"><i class="fa fa-ship"></i></a></li>
+      <li><a href="#profile" id="toggledraw" role="tab"><i class="fa fa-inbox"></i></a></li>
+    </ul>
+
+     <!-- bottom aligned tabs -->
+     <ul role="tablist">
+                <li><a href="#settings"><i class="fa fa-gear"></i></a></li>
+            </ul>
+  </div>
+
+  <!-- Sidebar tab content -->
+  <div class="leaflet-sidebar-content">
+
+    <div class="leaflet-sidebar-pane" id="home">
+      <h1 class="leaflet-sidebar-header">
+        Layers
+        <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+      </h1>
+      <span id="layercontrol"></span>
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+
+
+<img src="arcticnet-logo.png" width="100%">
+<img src="unb-logo.png" width="36%">
+<img src="omg-logo.png" width="59%">
+      <div id="latlng"></div>
+    </div>
+
+            <div class="leaflet-sidebar-pane" id="autopan">
+                <h1 class="leaflet-sidebar-header">
+                    Sub Bottom Profiles
+                    <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+                <p>
+                    This is where all the geoJSON line files that represent the ship tracks will be displayed.
+                </p>
+                <p>
+                    Colour-coded by year & vessel... eventually
+                </p>
+                <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+            </div>
+
+            <div class="leaflet-sidebar-pane" id="profile">
+                <h1 class="leaflet-sidebar-header">
+                    Gap Analysis
+                    <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+                <p>
+                    This is where all the gap/spatial analysis will go.
+                </p>
+                <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+            </div>
+
+            <div class="leaflet-sidebar-pane" id="messages">
+                <h1 class="leaflet-sidebar-header">Messages<span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+            </div>
+
+            <div class="leaflet-sidebar-pane" id="settings">
+                <h1 class="leaflet-sidebar-header">
+                    Settings
+                    <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+                <p>
+                    User settings will go here. Changing colour scale eventually. Or maybe this will be the tab to contain credits for plugins & WMS layers I used. Or both?
+                </p>
+                <p class="lorem">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+
+            </div>
+        </div>
+    </div>
+
+<div id="map"></div>
+<div id="pixelValue" class="leaflet-bar">Click map for depth in m</div>
+
+<!-- partial -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/leaflet-sidebar-v2@3.1.1/js/leaflet-sidebar.min.js'></script>
+
+
+</body>
+</html>
+
+<script src="2014_Amundsen.js" type="text/javascript"></script>
+<script>
+var marker = L.marker([40.697002, -74.024081]).bindPopup('This is a popup.')
+
+//Init Overlays
+var overlays = {
+    "Markers": marker,
+  "CHS NONNA-100": L.tileLayer.wms(
+    "https://data.chs-shc.ca/geoserver/ows?",
+    {
+      layers: "caris:NONNA 100 Tiles",
+      format: "image/png",
+      transparent: true
+    }
+  ),
+  "IHO Mosaic": L.tileLayer.wms(
+    "https://gis.ngdc.noaa.gov/arcgis/rest/services/multibeam_mosaic/ImageServer", {
+  }),
+  "GEBCO Contours": L.tileLayer(
+    "https://tiles.arcgis.com/tiles/C8EMgrsFcRFL6LrL/arcgis/rest/services/GEBCO_contours/MapServer/tile/{z}/{y}/{x}", {
+  }),
+};
+
+//Init BaseMaps
+var basemaps = {
+  "OpenStreetMaps": L.tileLayer(
+    "http://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+    {
+      id: "osm.streets"
+    }
+  ),
+  "GEBCO": L.tileLayer.wms(
+    "https://www.gebco.net/data_and_products/gebco_web_services/web_map_service/mapserv?",
+    {
+      layers: "GEBCO_Latest"
+    }
+  ),
+  "Google-Satellite": L.tileLayer(
+    "https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
+    {
+      id: "google.hybrid"
+    }
+  ),
+  "GMRT Basemap": L.tileLayer.wms(
+    "https://www.gmrt.org/services/mapserver/wms_merc?",
+    {
+	layers: 'topo',
+	format: 'image/png',
+	transparent: true,    }
+  ),
+  "ESRI Ocean Basemap": L.tileLayer(
+    "https://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}",
+    {
+      id: "google.satellite"
+    }
+  ),
+  "Layer Name": L.tileLayer(
+    "https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}",
+    {
+      id: "google.satellite"
+    }
+  ),
+};
+
+
+
+//Map Options
+var mapOptions = {
+  zoomControl: false,
+  attributionControl: false,
+  center: [65, -105],
+  zoom: 3.5,
+
+  layers: [basemaps.OpenStreetMaps],
+};
+
+
+//Render Main Map
+var map = L.map("map", mapOptions);
+
+//Render Zoom Control
+L.control
+  .zoom({
+    position: "bottomright"
+  })
+  .addTo(map);
+
+var sidebar = L.control
+  .sidebar({
+    autopan: false,
+    container: "sidebar",
+    position: "left"
+  })
+  .addTo(map);
+  
+  
+
+//Render Layer Control & Move to Sidebar
+var layerControl = L.control
+  .layers(basemaps, overlays, {
+    position: "topleft",
+    collapsed: false
+  })
+  .addTo(map);
+var oldLayerControl = layerControl.getContainer();
+var newLayerControl = $("#layercontrol");
+newLayerControl.append(oldLayerControl);
+$(".leaflet-control-layers-list").prepend("<strong class='title'>Base Maps</strong><br>");
+$(".leaflet-control-layers-separator").after("<br><strong class='title'>Overlay Maps</strong>");
+
+
+       // add panels dynamically to the sidebar
+        sidebar
+            .addPanel({
+                id:   'js-api',
+                tab:  '<i class="fa fa-arrows"></i>',
+                title: 'More Functions',
+                pane: '<p>Create or modify the panel state.<p/><p><button onclick="sidebar.enablePanel(\'mail\')">enable mails panel</button><button onclick="sidebar.disablePanel(\'mail\')">disable mails panel</button></p><p><button onclick="addUser()">add user</button></b>',
+            })
+            // add a tab with a click callback, initially disabled
+            .addPanel({
+                id:   'mail',
+                tab:  '<i class="fa fa-envelope"></i>',
+                title: 'Messages',
+                button: function() { alert('opened via JS callback') },
+                disabled: true,
+            })
+
+        // be notified when a panel is opened
+        sidebar.on('content', function (ev) {
+            switch (ev.id) {
+                case 'autopan':
+                sidebar.options.autopan = true;
+                break;
+                default:
+                sidebar.options.autopan = false;
+            }
+        });
+
+        var userid = 0
+        function addUser() {
+            sidebar.addPanel({
+                id:   'user' + userid++,
+                tab:  '<i class="fa fa-user"></i>',
+                title: 'User Profile ' + userid,
+                pane: '<p>user ipsum dolor sit amet</p>',
+            });
+        }
+
+map.addEventListener('click', function (e)  {
+   var tag = document.createElement("p");
+   var text = document.createTextNode("Sub bottom profile will show up here after you click.");
+   tag.appendChild(text);
+   var element = document.getElementById("pixelValue");
+   element.appendChild(tag);
+  });
+
+function onEachFeature(feature, layer) {
+		var popupContent = '<p>I started out as a GeoJSON ' +
+				feature.geometry.type + ', but now I\'m a Leaflet vector!</p>';
+
+		if (feature.properties && feature.properties.popupContent) {
+			popupContent += feature.properties.popupContent;
+		}
+
+		layer.bindPopup(popupContent);
+	}
+var freeBusLayer = L.geoJSON(freeBus, {
+
+		filter: function (feature, layer) {
+			if (feature.properties) {
+				// If the property "underConstruction" exists and is true, return false (don't render features under construction)
+				return feature.properties.underConstruction !== undefined ? !feature.properties.underConstruction : true;
+			}
+			return false;
+		},
+
+		onEachFeature: onEachFeature
+	}).addTo(map);
+
+
+</script>
